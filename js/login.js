@@ -39,7 +39,7 @@ class LoginSystem {
                 createdAt: new Date().toISOString()
             };
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-            this.showMessage('¡Bienvenida mi amor! 💕 25 de marzo de 2025 - El día que comenzamos nuestra historia de amor', 'success');
+            this.showMessage('¡Bienvenida mi amor! 💕 4 de abril de 2025 - El día que comenzamos nuestra historia de amor', 'success');
             
             setTimeout(() => {
                 window.location.href = 'cartas.html';

@@ -31,11 +31,11 @@ class LoginSystem {
         }
 
         // Usuario predefinido especial
-        if (username === 'miniña' && password === '050325') {
+        if (username === 'myniña' && password === '050425') {
             this.currentUser = {
                 id: 1,
-                username: 'miniña',
-                password: '050325',
+                username: 'myniña',
+                password: '050425',
                 createdAt: new Date().toISOString()
             };
             localStorage.setItem('currentUser', JSON.stringify(this.currentUser));

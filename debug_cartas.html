@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Cartas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff69b4;
+            text-align: center;
+        }
+        .debug-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .error {
+            background: #ffe6e6;
+            border-color: #ff4444;
+        }
+        .success {
+            background: #e6ffe6;
+            border-color: #44ff44;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Debug - Verificar Asignación de Cartas</h1>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Simular los datos de cartas
+        const cartas = [
+            { fecha: "2025-08-01", archivo: "carta-01.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-02", archivo: "carta-02.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-03", archivo: "carta-03.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-04", archivo: "carta-04.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-05", archivo: "carta-05.html", esAniversario: true, mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-06", archivo: "carta-06.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-07", archivo: "carta-07.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-08", archivo: "carta-08.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-09", archivo: "carta-09.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-10", archivo: "carta-10.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-11", archivo: "carta-11.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-12", archivo: "carta-12.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-13", archivo: "carta-13.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-14", archivo: "carta-14.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-15", archivo: "carta-15.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-16", archivo: "carta-16.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-17", archivo: "carta-17.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-18", archivo: "carta-18.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-19", archivo: "carta-19.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-20", archivo: "carta-20.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-21", archivo: "carta-21.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-22", archivo: "carta-22.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-23", archivo: "carta-23.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-24", archivo: "carta-24.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-25", archivo: "carta-25.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-26", archivo: "carta-26.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-27", archivo: "carta-27.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-28", archivo: "carta-28.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-29", archivo: "carta-29.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-30", archivo: "carta-30.html", mes: "ago", mesNum: 0 },
+            { fecha: "2025-08-31", archivo: "carta-31.html", mes: "ago", mesNum: 0 }
+        ];
+
+        function debugCartas() {
+            const results = document.getElementById('results');
+            
+            // Filtrar cartas de agosto
+            const cartasDelMes = cartas.filter(carta => carta.mesNum === 0);
+            
+            results.innerHTML = '<h3>📋 Cartas de Agosto:</h3>';
+            cartasDelMes.forEach(carta => {
+                const fecha = new Date(carta.fecha);
+                const dia = fecha.getDate();
+                const diaSemana = fecha.toLocaleDateString('es-ES', { weekday: 'long' });
+                
+                const div = document.createElement('div');
+                div.className = 'debug-item success';
+                div.innerHTML = `
+                    <strong>Día ${dia} (${diaSemana}):</strong> ${carta.archivo}
+                    ${carta.esAniversario ? ' 💞 ANIVERSARIO' : ''}
+                `;
+                results.appendChild(div);
+            });
+            
+            // Test de búsqueda actual (problemática)
+            results.innerHTML += '<h3>🔍 Test de Búsqueda Actual (PROBLEMÁTICA):</h3>';
+            for (let dia = 1; dia <= 31; dia++) {
+                const cartaEncontrada = cartasDelMes.find(c => new Date(c.fecha).getDate() === dia);
+                
+                const div = document.createElement('div');
+                div.className = `debug-item ${cartaEncontrada ? 'success' : 'error'}`;
+                
+                if (cartaEncontrada) {
+                    const archivoMatch = cartaEncontrada.archivo.match(/carta-(\d+)\.html/);
+                    const numeroArchivo = archivoMatch ? parseInt(archivoMatch[1]) : 0;
+                    const esCorrecto = numeroArchivo === dia;
+                    
+                    div.innerHTML = `
+                        <strong>Día ${dia}:</strong> ${cartaEncontrada.archivo} 
+                        ${esCorrecto ? '✅' : '❌'} (esperado: carta-${dia}.html)
+                    `;
+                    div.className = `debug-item ${esCorrecto ? 'success' : 'error'}`;
+                } else {
+                    div.innerHTML = `<strong>Día ${dia}:</strong> ❌ No se encontró carta`;
+                }
+                
+                results.appendChild(div);
+            }
+            
+            // Test de búsqueda corregida
+            results.innerHTML += '<h3>🔧 Test de Búsqueda Corregida:</h3>';
+            for (let dia = 1; dia <= 31; dia++) {
+                const fechaBuscar = `2025-08-${dia.toString().padStart(2, '0')}`;
+                const cartaEncontrada = cartasDelMes.find(c => c.fecha === fechaBuscar);
+                
+                const div = document.createElement('div');
+                div.className = `debug-item ${cartaEncontrada ? 'success' : 'error'}`;
+                
+                if (cartaEncontrada) {
+                    const archivoMatch = cartaEncontrada.archivo.match(/carta-(\d+)\.html/);
+                    const numeroArchivo = archivoMatch ? parseInt(archivoMatch[1]) : 0;
+                    const esCorrecto = numeroArchivo === dia;
+                    
+                    div.innerHTML = `
+                        <strong>Día ${dia}:</strong> ${cartaEncontrada.archivo} 
+                        ${esCorrecto ? '✅' : '❌'} (esperado: carta-${dia}.html)
+                    `;
+                    div.className = `debug-item ${esCorrecto ? 'success' : 'error'}`;
+                } else {
+                    div.innerHTML = `<strong>Día ${dia}:</strong> ❌ No se encontró carta`;
+                }
+                
+                results.appendChild(div);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', debugCartas);
+    </script>
+</body>
+</html> 

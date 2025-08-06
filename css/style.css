@@ -1,0 +1,474 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Banner Superior Fijo */
+.next-card-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 105, 180, 0.95);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.next-card-banner h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.next-card-banner p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Modal Centrado */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 90%;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #ff69b4;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: #f0f0f0;
+}
+
+.modal-title {
+    color: #ff69b4;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.modal-message {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.modal-countdown {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Ajustar el container principal para el banner */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 80px; /* Espacio para el banner fijo */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+#welcomeMessage {
+    background: rgba(255,255,255,0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#welcomeMessage p {
+    color: #ff69b4;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Calendar Section */
+.calendar-section h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Month Sections */
+.month-section {
+    margin-bottom: 40px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.month-title {
+    color: #ff69b4;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Calendar Container */
+.calendar-container {
+    margin-bottom: 20px;
+}
+
+.calendar-real-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+/* Calendar Day Headers */
+.calendar-day-header {
+    text-align: center;
+    font-weight: bold;
+    color: #ff69b4;
+    padding: 10px 5px;
+    font-size: 0.9rem;
+}
+
+/* Calendar Days */
+.calendar-day-real {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px;
+    min-height: 50px;
+}
+
+.calendar-day-real.available {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    box-shadow: 0 2px 10px rgba(255,105,180,0.3);
+}
+
+.calendar-day-real.locked {
+    background: #f0f0f0;
+    color: #999;
+    border: 2px dashed #ccc;
+}
+
+.calendar-day-real.no-carta {
+    background: rgba(255,255,255,0.5);
+    color: #666;
+}
+
+.calendar-day-real.selected {
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(255,105,180,0.5);
+    z-index: 10;
+}
+
+.calendar-day-real:hover {
+    transform: translateY(-2px);
+}
+
+.calendar-day-real.available:hover {
+    box-shadow: 0 4px 15px rgba(255,105,180,0.4);
+}
+
+.calendar-day-empty {
+    aspect-ratio: 1;
+    background: transparent;
+}
+
+.day-number-real {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.day-indicator {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Countdown Section */
+.countdown-section {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.countdown-info h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.countdown-info p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+#countdown-timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Message Section */
+.message-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.message-title {
+    color: #ff69b4;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.message-text {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.date-display {
+    color: #ff69b4;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    margin-top: 30px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .month-section {
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .month-title {
+        font-size: 1.5rem;
+    }
+    
+    .calendar-real-grid {
+        gap: 3px;
+    }
+    
+    .calendar-day-real {
+        min-height: 40px;
+        padding: 3px;
+    }
+    
+    .day-number-real {
+        font-size: 0.9rem;
+    }
+    
+    .day-indicator {
+        font-size: 0.7rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .message-card {
+        padding: 20px;
+    }
+    
+    .countdown-section {
+        padding: 15px;
+    }
+    
+    #countdown-timer {
+        font-size: 1.2rem;
+    }
+    
+    /* Estilos móvil para banner y modal */
+    .next-card-banner {
+        padding: 8px 15px;
+    }
+    
+    .next-card-banner h3 {
+        font-size: 0.9rem;
+    }
+    
+    .next-card-banner p {
+        font-size: 0.8rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 25px;
+        margin: 20px;
+    }
+    
+    .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    .modal-countdown {
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    .container {
+        margin-top: 70px; /* Menos espacio en móvil */
+    }
+}
+
+/* Estilos para las cartas HTML */
+.carta-title {
+    color: #ff69b4;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.carta-content {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    text-align: left;
+}
+
+.carta-content p {
+    margin-bottom: 15px;
+}
+
+.carta-verse {
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    font-style: italic;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Botón de logout */
+.logout-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px;
+    color: #ff69b4;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.logout-btn:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+} 
